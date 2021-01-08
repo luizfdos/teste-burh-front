@@ -1,19 +1,22 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
+import ShowTeachers from '../components/ShowTeachers.vue';
 import Main from '../components/Main.vue';
 
 Vue.use(VueRouter);
-
-const routes = [
-  {
-    path: '/',
-    name: 'Main',
-    component: Main,
-  },
-];
-
-const router = new VueRouter({
-  routes,
+export default new VueRouter({
+  routes: [
+    {
+      path: '/',
+      component: Main,
+      children: [
+        {
+          path: '/teachers',
+          component: ShowTeachers,
+        },
+      ],
+    },
+  ],
+  mode: 'history',
 });
-
-export default router;

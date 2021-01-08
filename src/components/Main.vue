@@ -1,12 +1,16 @@
 <template>
+  <div>
     <header>
       <div class="wrapper">
         <img src="@/assets/logo.svg" alt="" class="logo" />
         <div class="links">
           <a href="/">Professores</a>
+          <a href="/"></a>
         </div>
       </div>
     </header>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
@@ -35,11 +39,9 @@ header {
   }
   img.logo {
     width: 220px;
-    grid-column: 1 / 3;
   }
   .links {
       font-size: 24px;
-      grid-column: 3/4;
       a {
         text-decoration: none;
         color: white;
@@ -70,7 +72,6 @@ header {
         transition: width 400ms ease-in-out;
       }
   }
-
 }
 
 </style>
