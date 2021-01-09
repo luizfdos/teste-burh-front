@@ -35,7 +35,7 @@
             <div class="total_students">{{ teacher.total_students }}</div>
           </td>
           <td>
-            <a :href="'/teachers/' + teacher.id">ver</a>
+            <a :href="'/teachers/' + teacher._id">ver</a>
           </td>
         </tr>
       </tbody>
@@ -44,33 +44,21 @@
 </template>
 
 <script>
+import axios from 'axios';
+
+const url = `https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher`;
 
 export default {
   data() {
     return {
-      teachers: [{
-        id: 1,
-        name: 'Dannielle Vidal Siqueira',
-        avatar_url: 'https://media-exp1.licdn.com/dms/image/C4D35AQGX7LmChE_fXw/profile-framedphoto-shrink_800_800/0/1608746748556?e=1610215200&v=beta&t=KZK-YkmMCDZoihE0wTZl2oR8-elQVIGTECu4mH5JeHU',
-        subjects_taught: ['Graphic Design', 'Ux/Ui Design'],
-        total_students: 10,
-      },
-      {
-        id: 1,
-        name: 'Rubens Pereira',
-        avatar_url: 'https://images.unsplash.com/photo-1590086783191-a0694c7d1e6e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80',
-        subjects_taught: ['ReactJS', 'Typescript', 'VueJS', 'Elixir'],
-        total_students: 8,
-      },
-      {
-        id: 1,
-        name: 'Leo Camargo',
-        avatar_url: 'https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-        subjects_taught: ['ReactJS', 'Typescript', 'VueJS', 'Elixir'],
-        total_students: 8,
-      },
-      ],
+      teachers: [],
     };
+  },
+  mounted() {
+    axios
+      .get(url)
+      // eslint-disable-next-line no-return-assign
+      .then((response) => (this.teachers = response.data));
   },
 };
 </script>
