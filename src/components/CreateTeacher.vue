@@ -1,11 +1,9 @@
 <template>
-  <form class="card" method="POST" action="/teachers">
+  <form class="card" @submit.prevent='submitForm'>
     <section
       class="avatar"
       style="
-        background: url(https://source.unsplash.com/collection/8874679/500x500)
-          no-repeat center center / cover;
-      "
+        background: url(https://source.unsplash.com/collection/8874679/600x600);"
     ></section>
     <section class="details">
       <h3>Novo professor</h3>
@@ -14,7 +12,7 @@
         <div>
           <input
             type="url"
-            name="avatar_url"
+            v-model="avatar_url"
             placeholder="http://"
             value=""
           />
@@ -25,7 +23,7 @@
         <div>
           <input
             type="text"
-            name="name"
+            v-model="name"
             placeholder="Digite o nome"
             value=""
           />
@@ -34,12 +32,12 @@
       <div class="item">
         <div>Data de nascimento</div>
         <div>
-          <input type="date" name="birth_date" value="" />
+          <input type="date" v-model="birth_date" value="" />
         </div>
       </div>
       <div class="item">
         <div>Escolaridade</div>
-        <select name="education_level" placeholder="Selecione">
+        <select v-model="education_level" placeholder="Selecione">
           <option value="medio">Ensino Médio Completo</option>
 
           <option value="superior">Ensino Superior Completo</option>
@@ -55,7 +53,7 @@
         <div>
           <input
             type="text"
-            name="subjects_taught"
+            v-model="subjects_taught"
             placeholder="Digite  as matérias separadas por vírgula"
             value=""
           />
@@ -66,22 +64,51 @@
         <div>Tipo de aula</div>
         <div>
           <span>
-            <input type="radio" name="class_type" value="Presencial" />
+            <input type="radio" v-model="class_type" value="Presencial" />
             Presencial
           </span>
 
           <span>
-            <input type="radio" name="class_type" value="À distância" />
+            <input type="radio" v-model="class_type" value="À distância" />
             À distância
           </span>
         </div>
       </div>
+      <button type="submit">Salvar</button>
     </section>
+
   </form>
 </template>
 
 <script>
-export default {};
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      name: '',
+      avatar_url: '',
+      birth_date: '',
+      education_level: '',
+      subjects_taught: '',
+      class_type: '',
+    };
+  },
+  methods: {
+    submitForm() {
+      axios
+        .post(`https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher`,
+          {
+            name: this.name,
+            avatar_url: this.avatar_url,
+            birth_date: this.avatar_url,
+            education_level: this.education_level,
+            subjects_taught: this.subjects_taught.split(','),
+            class_type: this.class_type,
+          }).then((response) => (this.$router.push(`/teachers/${response.data._id}`)));
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
