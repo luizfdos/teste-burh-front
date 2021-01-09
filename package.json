@@ -42,7 +42,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "rules": {
+      "no-underscore-dangle": "off",
+      "no-return-assign": "off"
+    },
     "overrides": [
       {
         "files": [
