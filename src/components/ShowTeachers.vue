@@ -1,7 +1,7 @@
 <template>
   <div class="card table-container">
     <div class="header">
-      <a href="#" class="button">Novo</a>
+      <a href="/create" class="button">Novo</a>
     </div>
     <table width="100%">
       <thead>
@@ -78,63 +78,37 @@ export default {
 <style lang="scss">
 
 .card {
-    min-height: 400px;
-    width: 800px;
-    margin: 45px auto;
-    background-color: var(--panel-color);
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    box-shadow: 1px 1px 5px 5px rgba(51, 26, 26, 0.5);
+  min-height: 400px;
+  width: 800px;
+  margin: 45px auto;
+  background-color: var(--panel-color);
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  box-shadow: 1px 1px 5px 5px rgba(51, 26, 26, 0.5);
 
-    opacity: 0;
-    animation-name: left;
-    animation-duration: 700ms;
-    animation-fill-mode: forwards;
-    transition-timing-function: ease;
+  opacity: 0;
+  animation-name: left;
+  animation-duration: 700ms;
+  animation-fill-mode: forwards;
+  transition-timing-function: ease;
 }
 
 @keyframes left {
-    from {
-        transform: translateX(20px);
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+      transform: translateX(20px);
+  }
+  to {
+      opacity: 1;
+  }
 }
 
 .details {
-    padding: 32px;
-}
-
-.details .item {
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3 );
-}
-
-.details .item:last-child {
-    border: none;
-}
-
-.details .item div:nth-child(1) {
-    font-size: 14px;
-    line-height: 24px;
-    letter-spacing: 0.8px;
-    font-weight: 500;
-    padding-bottom: 4px;
-}
-
-.details .item div:nth-child(2) {
-    font-size: 18px;
-    font-weight: bold;
-    filter: brightness(150%);
-}
-
-.details h3 {
+  padding: 32px;
+  h3 {
     color: var(--hover-color);
     text-transform: uppercase;
-}
-
-.details span {
+  }
+  span {
     padding: 6px 10px;
     margin: 5px 0 0 10px;
     display: inline-block;
@@ -144,77 +118,105 @@ export default {
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
+  }
+
+  .item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3 );
+    &:last-child {
+      border: none;
+    }
+    div:nth-child(1) {
+      font-size: 14px;
+      line-height: 24px;
+      letter-spacing: 0.8px;
+      font-weight: 500;
+      padding-bottom: 4px;
+    }
+    div:nth-child(1) {
+      font-size: 14px;
+      line-height: 24px;
+      letter-spacing: 0.8px;
+      font-weight: 500;
+      padding-bottom: 4px;
+    }
+    .item div:nth-child(2) {
+      font-size: 18px;
+      font-weight: bold;
+      filter: brightness(150%);
+    }
+  }
 }
 
 .table-container {
-    display: block;
-    padding: 40px;
-    box-sizing: border-box;
-    width: 1000px;
-    height: auto;
+  display: block;
+  padding: 40px;
+  box-sizing: border-box;
+  width: 1000px;
+  height: auto;
 }
 
 .table-container table {
-    border-spacing: 0;
+  border-spacing: 0;
 }
 
 .table-container thead tr th {
-    text-align: left;
+  text-align: left;
 }
 
 td, th {
-    padding: 16px;
-    border-bottom: 1px solid var(--secondary-text-color);
+  padding: 16px;
+  border-bottom: 1px solid var(--secondary-text-color);
 }
 
 th {
-    text-transform: uppercase;
-    font-size: 14px;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 
 tbody tr:last-child td {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 tbody tr td:first-child {
-    display: grid;
-    grid-template-columns: 64px 1fr;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
 }
 
 tbody tr td:first-child span {
-    width: 40px;
-    height: 40px;
-    box-sizing: border-box;
-    background-size: cover;
-    background-position: center;
-    border-radius: 50%;
-    box-shadow: 3px 2px 6px -4px white;
-    border: 2px solid var(--text-color);
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  box-shadow: 3px 2px 6px -4px white;
+  border: 2px solid var(--text-color);
 }
 
 .table-container tr td:last-child a,
 .table-container span {
-    background-color: var(--hover-color);
-    padding: 6px 16px;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: white;
-    font-size: 12px;
-    border-radius: 4px;
-    margin-bottom: auto;
+  background-color: var(--hover-color);
+  padding: 6px 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-bottom: auto;
 
 }
 
 .table-container span {
-    padding: 4px 6px;
-    margin-right: 4px;
-    box-shadow: 1px 2px 5px -4px white;
+  padding: 4px 6px;
+  margin-right: 4px;
+  box-shadow: 1px 2px 5px -4px white;
 }
 
 .table-container thead tr th:last-child,
 td:last-child, div.total_students {
-    text-align: center;
+  text-align: center;
 }
 
 </style>
