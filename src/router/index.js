@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import ShowTeachers from '../components/ShowTeachers.vue';
 import Main from '../components/Main.vue';
+import CreateTeacher from '../components/CreateTeacher.vue';
 
 Vue.use(VueRouter);
 export default new VueRouter({
@@ -12,8 +13,12 @@ export default new VueRouter({
       component: Main,
       children: [
         {
-          path: '/teachers',
+          path: '/',
           component: ShowTeachers,
+        },
+        {
+          path: '/create',
+          component: CreateTeacher,
         },
       ],
     },
