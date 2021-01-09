@@ -46,8 +46,6 @@
 <script>
 import axios from 'axios';
 
-const url = `https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher`;
-
 export default {
   data() {
     return {
@@ -56,8 +54,7 @@ export default {
   },
   mounted() {
     axios
-      .get(url)
-      // eslint-disable-next-line no-return-assign
+      .get(`https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher`)
       .then((response) => (this.teachers = response.data));
   },
 };
