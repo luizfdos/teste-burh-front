@@ -1,10 +1,6 @@
 <template>
-  <form class="card" @submit.prevent='submitForm'>
-    <section
-      class="avatar"
-      style="
-        background: url(https://source.unsplash.com/collection/8874679/600x600);"
-    ></section>
+  <form class="card" @submit.prevent="submitForm">
+    <section class="avatar"><img src="https://source.unsplash.com/collection/8874679/800x800" alt=""></section>
     <section class="details">
       <h3>Novo professor</h3>
       <div class="item">
@@ -40,7 +36,9 @@
         <select v-model="education_level" placeholder="Selecione">
           <option value="Ensino Médio Completo">Ensino Médio Completo</option>
 
-          <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+          <option value="Ensino Superior Completo">
+            Ensino Superior Completo
+          </option>
 
           <option value="Mestrado">Mestrado</option>
 
@@ -74,9 +72,17 @@
           </span>
         </div>
       </div>
+      <div class="item">
+        <div>Atende aos finais de semana?</div>
+        <div>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
       <button type="submit">Salvar</button>
     </section>
-
   </form>
 </template>
 
@@ -97,7 +103,8 @@ export default {
   methods: {
     submitForm() {
       axios
-        .post(`https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher`,
+        .post(
+          `https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher`,
           {
             name: this.name,
             avatar_url: this.avatar_url,
@@ -105,28 +112,12 @@ export default {
             education_level: this.education_level,
             subjects_taught: this.subjects_taught.split(','),
             class_type: this.class_type,
-          }).then((response) => (this.$router.push(`/teacher/${response.data._id}`)));
+          },
+        )
+        .then((response) => this.$router.push(`/teacher/${response.data._id}`));
     },
   },
 };
 </script>
 
-<style lang="scss">
-
-input,
-select {
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  font-size: 17px;
-  padding: 2px;
-  outline: none;
-  color: var(--text-color);
-}
-
-input[type="radio"]{
-  width: initial;
-  margin-right: 8px;
-}
-
-</style>
+<style lang="scss" src="../assets/style/components/CreateTeacher.scss" />

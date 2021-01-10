@@ -1,13 +1,6 @@
 <template>
   <div class="card">
-    <section
-      class="avatard"
-      :style="
-        'background: url(' +
-        teacher.avatar_url +
-        ') no-repeat center center / cover'
-      "
-    ></section>
+    <section class="avatar"><img :src="teacher.avatar_url" alt=""> </section>
     <section class="details">
       <h3>Detalhes</h3>
 
@@ -96,19 +89,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-button#delete {
-  background-color: crimson;
-  cursor: pointer;
-}
-
-a {
-  text-align: center;
-}
-
-div.buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-</style>
+<style lang="scss" src="../assets/style/components/TeacherDetails.scss" />

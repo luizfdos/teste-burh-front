@@ -1,0 +1,113 @@
+@import '../variables.scss';
+
+.card {
+  min-height: 400px;
+  max-width: 900px;
+  width: 80%;
+  margin: 45px auto;
+  background-color: $panel-color;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  box-shadow: 1px 1px 5px 5px rgba(51, 26, 26, 0.5);
+
+  opacity: 0;
+  animation-name: left;
+  animation-duration: 700ms;
+  animation-fill-mode: forwards;
+  transition-timing-function: ease;
+}
+
+@keyframes left {
+  from {
+      transform: translateX(20px);
+  }
+  to {
+      opacity: 1;
+  }
+}
+table {
+  width: 100%;
+}
+
+.table-container {
+  display: block;
+  padding: 40px;
+  box-sizing: border-box;
+  max-width: 1000px;
+  height: auto;
+}
+
+.table-container table {
+  border-spacing: 0;
+}
+
+.table-container thead tr th {
+  text-align: left;
+}
+
+td, th {
+  padding: 16px;
+  border-bottom: 1px solid $secondary-text-color;
+}
+
+th {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr td:first-child {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+}
+
+tbody tr td:first-child span {
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  box-shadow: 3px 2px 6px -4px white;
+  border: 2px solid $text-color;
+}
+
+.table-container tr td:last-child a,
+.table-container span {
+  background-color: $hover-color;
+  padding: 6px 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-bottom: auto;
+
+}
+
+.table-container span {
+  padding: 4px 6px;
+  margin-right: 4px;
+  box-shadow: 1px 2px 5px -4px white;
+}
+
+.table-container thead tr th:last-child,
+td:last-child {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .table-container {
+    padding: 5%;
+  }
+  table {
+    .subjects_taught{
+     display: none; 
+    }
+  }
+  
+}

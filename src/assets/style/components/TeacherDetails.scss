@@ -1,0 +1,28 @@
+button#delete {
+  background-color: crimson;
+  cursor: pointer;
+}
+
+a {
+  text-align: center;
+}
+
+div.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+
+
+@media (max-width: 600px) {
+  div.buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 2% 0;
+    button, a {
+      margin: 5px 0;
+    }
+  }
+  
+}
