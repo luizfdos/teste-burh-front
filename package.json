@@ -44,7 +44,9 @@
     },
     "rules": {
       "no-underscore-dangle": "off",
-      "no-return-assign": "off"
+      "no-return-assign": "off",
+      "no-alert": "off",
+      "no-restricted-globals": "off"
     },
     "overrides": [
       {
