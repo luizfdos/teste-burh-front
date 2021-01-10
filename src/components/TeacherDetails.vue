@@ -43,7 +43,7 @@
         <div>{{ teacher.class_type }}</div>
       </div>
       <div class="buttons">
-        <a :href="'/teachers/' + teacher._id + '/edit'" class="button"
+        <a :href="'/teacher/edit/'+ teacher._id" class="button"
           >Editar</a
         >
         <form id="form-delete" @submit.prevent="deleteTeacher">
