@@ -5,6 +5,7 @@ import ShowTeachers from '../components/ShowTeachers.vue';
 import Main from '../components/Main.vue';
 import CreateTeacher from '../components/CreateTeacher.vue';
 import TeacherDetails from '../components/TeacherDetails.vue';
+import EditTeacher from '../components/EditTeacher.vue';
 
 Vue.use(VueRouter);
 export default new VueRouter({
@@ -24,6 +25,10 @@ export default new VueRouter({
         {
           path: '/teacher/:id',
           component: TeacherDetails,
+        },
+        {
+          path: '/teacher/edit/:id',
+          component: EditTeacher,
         },
       ],
     },
