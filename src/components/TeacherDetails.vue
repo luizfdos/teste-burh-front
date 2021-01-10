@@ -17,7 +17,7 @@
       </div>
       <div class="item">
         <div>Idade</div>
-        <div>{{ teacher.age }}</div>
+        <div>{{ dateToAge() }}</div>
       </div>
 
       <div class="item">
@@ -33,7 +33,8 @@
           <span
             v-for="subject in teacher.subjects_taught"
             v-bind:key="subject"
-            >{{ subject }}</span>
+            >{{ subject }}</span
+          >
         </div>
       </div>
 
@@ -41,14 +42,11 @@
         <div>Tipo de aula</div>
         <div>{{ teacher.class_type }}</div>
       </div>
-
-      <div class="item">
-        <div>Desde</div>
-        <div>{{ teacher.created_at }}</div>
-      </div>
       <div class="buttons">
-        <a :href="'/teachers/'+ teacher._id +'/edit'" class="button">Editar</a>
-        <form id="form-delete" @submit.prevent='deleteTeacher'>
+        <a :href="'/teachers/' + teacher._id + '/edit'" class="button"
+          >Editar</a
+        >
+        <form id="form-delete" @submit.prevent="deleteTeacher">
           <button type="submit" id="delete">Deletar</button>
         </form>
       </div>
@@ -67,17 +65,41 @@ export default {
   },
   mounted() {
     axios
-      .get(`https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher/${this.$route.params.id}`)
+      .get(
+        `https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher/${this.$route.params.id}`,
+      )
       .then((response) => (this.teacher = response.data));
   },
-};
+  methods: {
+    deleteTeacher() {
+      if (confirm('Deseja deletar?')) {
+        axios
+          .delete(
+            `https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher/${this.$route.params.id}`,
+          )
+          .then(() => this.$router.push('/'));
+      }
+    },
+    dateToAge() {
+      const today = new Date();
+      const birthDate = new Date(this.teacher.birth_date);
 
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const month = today.getMonth() - birthDate.getMonth();
+
+      if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+        age -= 1;
+      }
+      return age;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 button#delete {
-    background-color: crimson;
-    cursor: pointer;
+  background-color: crimson;
+  cursor: pointer;
 }
 
 a {
@@ -85,8 +107,8 @@ a {
 }
 
 div.buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 </style>
