@@ -8,7 +8,6 @@
         <tr>
           <th>Professor</th>
           <th>Acompanhamento</th>
-          <th id>Alunos</th>
           <th>Ação</th>
         </tr>
       </thead>
@@ -32,10 +31,7 @@
             >
           </td>
           <td>
-            <div class="total_students">{{ teacher.total_students }}</div>
-          </td>
-          <td>
-            <a :href="'/teachers/' + teacher._id">ver</a>
+            <a :href="'/teacher/' + teacher._id">ver</a>
           </td>
         </tr>
       </tbody>
@@ -99,7 +95,7 @@ export default {
     display: inline-block;
     border-radius: 7px;
     background-color: var(--hover-color);
-    color: var(--main-bg-color);
+    color: #fcfcfcfc;
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
@@ -200,7 +196,7 @@ tbody tr td:first-child span {
 }
 
 .table-container thead tr th:last-child,
-td:last-child, div.total_students {
+td:last-child {
   text-align: center;
 }
 

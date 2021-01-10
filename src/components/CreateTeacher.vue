@@ -38,13 +38,13 @@
       <div class="item">
         <div>Escolaridade</div>
         <select v-model="education_level" placeholder="Selecione">
-          <option value="medio">Ensino Médio Completo</option>
+          <option value="Ensino Médio Completo">Ensino Médio Completo</option>
 
-          <option value="superior">Ensino Superior Completo</option>
+          <option value="Ensino Superior Completo">Ensino Superior Completo</option>
 
-          <option value="mestrado">Mestrado</option>
+          <option value="Mestrado">Mestrado</option>
 
-          <option value="doutorado">Doutorado</option>
+          <option value="Doutorado">Doutorado</option>
         </select>
       </div>
 
@@ -101,17 +101,17 @@ export default {
           {
             name: this.name,
             avatar_url: this.avatar_url,
-            birth_date: this.avatar_url,
+            birth_date: this.birth_date,
             education_level: this.education_level,
             subjects_taught: this.subjects_taught.split(','),
             class_type: this.class_type,
-          }).then((response) => (this.$router.push(`/teachers/${response.data._id}`)));
+          }).then((response) => (this.$router.push(`/teacher/${response.data._id}`)));
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 input,
 select {
