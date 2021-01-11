@@ -70,6 +70,26 @@
             À distância
           </span>
         </div>
+              <div class="item">
+        <div>Atende finais de semana</div>
+        <div>
+          <label class="switch">
+            <input type="checkbox" v-model="teacher.work_on_weekends">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+       <div class="item">
+        <div>Preço por hora/aula</div>
+        <div>
+          <input
+            type="float"
+            v-model="teacher.hour_price"
+            placeholder="R$ preço em reais"
+            value=""
+          />
+        </div>
+      </div>
       </div>
       <button type="submit">Salvar</button>
     </section>
@@ -78,33 +98,35 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { fetchTeacher, updateTeacher } from '../services/index';
 
 export default {
+
   data() {
     return {
       teacher: {},
     };
   },
-  mounted() {
-    axios
-      .get(
-        `https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher/${this.$route.params.id}`,
-      )
-      .then((response) => (this.teacher = response.data));
+  async mounted() {
+    await fetchTeacher(this.$route.params.id)
+      .then((response) => response.data)
+      .then((teacher) => ({
+        ...teacher, subjects_taught: teacher.subjects_taught.join(','),
+      }))
+      .then((teacher) => (this.teacher = teacher));
   },
   methods: {
-    updateTeacher() {
-      axios
-        .put(`https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher/${this.$route.params.id}`,
-          {
-            name: this.teacher.name,
-            avatar_url: this.teacher.avatar_url,
-            birth_date: this.teacher.birth_date,
-            education_level: this.teacher.education_level,
-            subjects_taught: this.teacher.subjects_taught,
-            class_type: this.teacher.class_type,
-          }).then(() => (this.$router.push(`/teacher/${this.$route.params.id}`)));
+    async updateTeacher() {
+      await updateTeacher({
+        name: this.teacher.name,
+        avatar_url: this.teacher.avatar_url,
+        birth_date: this.teacher.birth_date,
+        education_level: this.teacher.education_level,
+        subjects_taught: this.teacher.subjects_taught.split(','),
+        class_type: this.teacher.class_type,
+        work_on_weekends: this.teacher.work_on_weekends,
+        hour_price: this.teacher.hour_price,
+      }, this.$route.params.id).then(() => (this.$router.push(`/teacher/${this.$route.params.id}`)));
     },
   },
 };

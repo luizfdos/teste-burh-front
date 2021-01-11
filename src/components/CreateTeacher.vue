@@ -73,12 +73,23 @@
         </div>
       </div>
       <div class="item">
-        <div>Atende aos finais de semana?</div>
+        <div>Atende finais de semana</div>
         <div>
           <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" v-model="taught_on_weekends">
             <span class="slider round"></span>
           </label>
+        </div>
+      </div>
+       <div class="item">
+        <div>Preço por hora/aula</div>
+        <div>
+          <input
+            type="float"
+            v-model="hour_price"
+            placeholder="R$ preço em reais"
+            value=""
+          />
         </div>
       </div>
       <button type="submit">Salvar</button>
@@ -87,9 +98,10 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { createTeacher } from '../services';
 
 export default {
+
   data() {
     return {
       name: '',
@@ -98,23 +110,22 @@ export default {
       education_level: '',
       subjects_taught: '',
       class_type: '',
+      taught_on_weekends: '',
     };
   },
   methods: {
-    submitForm() {
-      axios
-        .post(
-          `https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher`,
-          {
-            name: this.name,
-            avatar_url: this.avatar_url,
-            birth_date: this.birth_date,
-            education_level: this.education_level,
-            subjects_taught: this.subjects_taught.split(','),
-            class_type: this.class_type,
-          },
-        )
-        .then((response) => this.$router.push(`/teacher/${response.data._id}`));
+    async submitForm() {
+      const response = await createTeacher({
+        name: this.name,
+        avatar_url: this.avatar_url,
+        birth_date: this.birth_date,
+        education_level: this.education_level,
+        subjects_taught: this.subjects_taught.split(','),
+        class_type: this.class_type,
+        taught_on_weekends: this.taught_on_weekends,
+        hour_price: this.hour_price,
+      });
+      this.$router.push(`/teacher/${response.data._id}`);
     },
   },
 };

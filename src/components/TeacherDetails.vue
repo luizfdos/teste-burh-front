@@ -35,10 +35,20 @@
         <div>Tipo de aula</div>
         <div>{{ teacher.class_type }}</div>
       </div>
+      <div class="item">
+        <div>Atende finais de semana</div>
+        <div v-if="teacher.work_on_weekends">
+          Sim
+        </div>
+        <div v-else>Não</div>
+      </div>
+       <div class="item">
+        <div>Preço por hora/aula</div>
+          <div>R$ {{teacher.hour_price}}</div>
+      </div>
       <div class="buttons">
-        <a :href="'/teacher/edit/'+ teacher._id" class="button"
-          >Editar</a
-        >
+        <router-link :to="'/teacher/edit/'+ teacher._id" class="button"
+          >Editar</router-link>
         <form id="form-delete" @submit.prevent="deleteTeacher">
           <button type="submit" id="delete">Deletar</button>
         </form>
@@ -48,7 +58,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { deleteTeacher, fetchTeacher } from '../services/index';
 
 export default {
   data() {
@@ -56,20 +66,14 @@ export default {
       teacher: {},
     };
   },
-  mounted() {
-    axios
-      .get(
-        `https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher/${this.$route.params.id}`,
-      )
+  async mounted() {
+    await fetchTeacher(this.$route.params.id)
       .then((response) => (this.teacher = response.data));
   },
   methods: {
-    deleteTeacher() {
+    async deleteTeacher() {
       if (confirm('Deseja deletar?')) {
-        axios
-          .delete(
-            `https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher/${this.$route.params.id}`,
-          )
+        await deleteTeacher(this.$route.params.id)
           .then(() => this.$router.push('/'));
       }
     },

@@ -2,12 +2,11 @@
   <div>
     <header>
       <div class="wrapper">
-        <a href="/" class="logo">
+        <router-link to="/" class="logo">
           <img src="@/assets/logo.svg" alt="" class="logo" />
-        </a>
+        </router-link>
         <div class="links">
-          <a href="/">Professores</a>
-          <a href="/"></a>
+          <router-link to="/">Professores</router-link>
         </div>
       </div>
     </header>

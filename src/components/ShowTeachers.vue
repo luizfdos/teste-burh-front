@@ -1,7 +1,7 @@
 <template>
   <div class="card table-container" id="container">
     <div class="header">
-      <a href="/create" class="button">Novo</a>
+      <router-link to="/create" class="button">Novo</router-link>
     </div>
     <table>
       <thead>
@@ -31,7 +31,7 @@
             >
           </td>
           <td>
-            <a :href="'/teacher/' + teacher._id">ver</a>
+            <router-link :to="'/teacher/' + teacher._id">ver</router-link>
           </td>
         </tr>
       </tbody>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { fetchTeachers } from '../services/index';
 
 export default {
   data() {
@@ -48,10 +48,9 @@ export default {
       teachers: [],
     };
   },
-  mounted() {
-    axios
-      .get(`https://crudcrud.com/api/${process.env.VUE_APP_API_KEY}/teacher`)
-      .then((response) => (this.teachers = response.data));
+  async mounted() {
+    const response = await fetchTeachers();
+    this.teachers = response.data;
   },
 };
 </script>
