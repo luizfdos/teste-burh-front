@@ -26,7 +26,7 @@ Resolver o teste foi um desafio cheio de aprendizados e muita pesquisa, principa
 ## 🚀 [Projeto Rodando Live](https://my-teacher.vercel.app)
 <br>
 <br>
-## 🔍 Meu perfil no Burh:
+🔍 Meu perfil no Burh:
 
 - [Luiz Fernando](https://burh.com.br/luizsoares8)
 
