@@ -44,7 +44,8 @@
       </div>
        <div class="item">
         <div>Preço por hora/aula</div>
-          <div>R$ {{teacher.hour_price}}</div>
+          <div v-if="teacher.hour_price > 0">R$ {{teacher.hour_price}}</div>
+          <div class='free' v-else>Grátis</div>
       </div>
       <div class="buttons">
         <router-link :to="'/teacher/edit/'+ teacher._id" class="button"
