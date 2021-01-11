@@ -8,7 +8,7 @@
         <div>
           <input
             type="url"
-            v-model="avatar_url"
+            v-model.trim="avatar_url"
             placeholder="http://"
             value=""
           />
@@ -19,21 +19,56 @@
         <div>
           <input
             type="text"
-            v-model="name"
+            v-model.trim="name"
+            @change="$v.name.$touch()"
             placeholder="Digite o nome"
-            value=""
+            :class="{ 'error': $v.name.$error}"
           />
         </div>
+        <p v-if="$v.name.$error">
+          Por favor informe o nome
+        </p>
+        <p v-if="!$v.name.minLength">
+          O nome deve ter pelo menos {{$v.name.$params.minLength.min}} letras.
+        </p>
+      </div>
+      <div class="item">
+        <div>Número de telefone</div>
+        <div>
+          <input
+            type="text"
+            v-model="phone_number"
+            v-mask="'+55 (##) #####-####'"
+            @change="$v.phone_number.$touch()
+            ">
+        </div>
+        <p v-if="$v.phone_number.$error">
+          Por favor informe o telefone
+        </p>
       </div>
       <div class="item">
         <div>Data de nascimento</div>
         <div>
-          <input type="date" v-model="birth_date" value="" />
+          <input
+            type="date"
+            v-model.trim="birth_date"
+            @change="$v.birth_date.$touch()"
+            :class="{ 'error': $v.birth_date.$error}"
+
+          />
         </div>
+        <p v-if="$v.birth_date.$error">
+          Por favor informe a data
+        </p>
       </div>
       <div class="item">
         <div>Escolaridade</div>
-        <select v-model="education_level" placeholder="Selecione">
+        <select
+        v-model.trim="education_level"
+        @change="$v.education_level.$touch()"
+        placeholder="Digite o nome"
+        :class="{ 'error': $v.education_level.$error}"
+        >
           <option value="Ensino Médio Completo">Ensino Médio Completo</option>
 
           <option value="Ensino Superior Completo">
@@ -44,39 +79,60 @@
 
           <option value="Doutorado">Doutorado</option>
         </select>
+        <p v-if="$v.education_level.$error">
+          Por favor selecione a Escolaridade
+        </p>
       </div>
 
       <div class="item">
-        <div>Acompanhamento</div>
+        <div>Assuntos de ensinados</div>
         <div>
           <input
             type="text"
-            v-model="subjects_taught"
+            v-model.trim="subjects_taught"
+            @change="$v.subjects_taught.$touch()"
+            :class="{ 'error': $v.subjects_taught.$error}"
             placeholder="Digite  as matérias separadas por vírgula"
             value=""
           />
         </div>
+        <p v-if="$v.subjects_taught.$error">
+          Por favor informe os assuntos ensinados
+        </p>
       </div>
 
       <div class="item">
         <div>Tipo de aula</div>
         <div>
           <span>
-            <input type="radio" v-model="class_type" value="Presencial" />
+            <input
+            type="radio"
+            v-model.trim="class_type"
+            value="Presencial"
+            @change="$v.class_type.$touch()"
+             />
             Presencial
           </span>
 
           <span>
-            <input type="radio" v-model="class_type" value="À distância" />
+            <input
+            type="radio"
+            v-model.trim="class_type"
+            value="À distância"
+            @change="$v.class_type.$touch()"
+            />
             À distância
           </span>
         </div>
+        <p v-if="$v.class_type.$error">
+          Por favor selecione o tipo de aula
+        </p>
       </div>
       <div class="item">
         <div>Atende finais de semana</div>
         <div>
           <label class="switch">
-            <input type="checkbox" v-model="taught_on_weekends">
+            <input type="checkbox" v-model.trim="taught_on_weekends">
             <span class="slider round"></span>
           </label>
         </div>
@@ -86,18 +142,23 @@
         <div>
           <input
             type="float"
-            v-model="hour_price"
+            v-model.trim="hour_price"
+            @change="$v.hour_price.$touch()"
             placeholder="R$ preço em reais"
-            value=""
           />
         </div>
+        <p v-if="!$v.hour_price.between">
+          Informe um valor entre
+          R${{$v.hour_price.$params.between.min}} e
+          R${{$v.hour_price.$params.between.max}}</p>
       </div>
-      <button type="submit">Salvar</button>
+      <button type="submit" @click.prevent="create()">Salvar</button>
     </section>
   </form>
 </template>
 
 <script>
+import { required, minLength, between } from 'vuelidate/lib/validators';
 import { createTeacher } from '../services';
 
 export default {
@@ -105,18 +166,33 @@ export default {
   data() {
     return {
       name: '',
+      phone_number: '',
       avatar_url: '',
       birth_date: '',
       education_level: '',
       subjects_taught: '',
       class_type: '',
       taught_on_weekends: '',
+      hour_price: '',
     };
+  },
+  validations: {
+    name: {
+      required,
+      minLength: minLength(4),
+    },
+    phone_number: { required },
+    birth_date: { required },
+    education_level: { required },
+    subjects_taught: { required },
+    class_type: { required },
+    hour_price: { between: between(0, 300) },
   },
   methods: {
     async submitForm() {
       const response = await createTeacher({
         name: this.name,
+        phone_number: this.phone_number,
         avatar_url: this.avatar_url,
         birth_date: this.birth_date,
         education_level: this.education_level,
@@ -126,6 +202,12 @@ export default {
         hour_price: this.hour_price,
       });
       this.$router.push(`/teacher/${response.data._id}`);
+    },
+    create() {
+      this.$v.$touch();
+      if (!this.$v.$invalid && !this.$v.$required && !this.$v.$minLength) {
+        this.submitForm();
+      }
     },
   },
 };

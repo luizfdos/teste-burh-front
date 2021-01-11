@@ -9,6 +9,10 @@
         <div>{{ teacher.name }}</div>
       </div>
       <div class="item">
+        <div>Telefone</div>
+        <div>{{ teacher.phone_number }}</div>
+      </div>
+      <div class="item">
         <div>Idade</div>
         <div>{{ dateToAge() }}</div>
       </div>

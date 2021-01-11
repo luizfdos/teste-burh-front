@@ -7,6 +7,13 @@
     color: $hover-color;
     text-transform: uppercase;
   }
+  .error {
+    border: 1px solid red;
+  }
+  p {
+    text-align: right;
+    color: red;
+  }
   span {
     padding: 6px 10px;
     margin: 5px 0 0 10px;

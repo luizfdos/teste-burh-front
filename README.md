@@ -14,6 +14,11 @@
 
 📖  O my teacher é um projeto para cadastro de professores particulares, para que o contato fique disponivel a possíveis alunos. 
 
+<br>
+
+Resolver o teste foi um desafio cheio de aprendizados e muita pesquisa, principalmente por eu nunca ter trabalhado com VueJS antes. Até hoje só havia desenvolvido sem frameworks, havia só acompanhado alguns tutoriais de react, mas não sabia a fundo também. Então foi a primeira vez 
+
+
 ## 🔍 Meu perfil no Burh:
 
 - [Luiz Fernando](https://burh.com.br/luizsoares8)
