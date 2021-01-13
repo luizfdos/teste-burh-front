@@ -38,7 +38,7 @@ header {
         filter: brightness(170%);
         opacity: 1;
       }
-      .links a::after {
+      a::after {
         content: "";
         width: 0;
         height: 2px;
