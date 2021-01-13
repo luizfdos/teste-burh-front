@@ -76,6 +76,10 @@ tbody tr td:first-child span {
   border: 2px solid $text-color;
 }
 
+.free {
+  font-weight: bold;
+}
+
 .table-container tr td:last-child a,
 .table-container span {
   background-color: $hover-color;
@@ -100,14 +104,53 @@ td:last-child {
   text-align: center;
 }
 
-@media (max-width: 600px) {
-  .table-container {
-    padding: 5%;
-  }
-  table {
-    .subjects_taught{
-     display: none; 
+@media (max-width: 950px) {
+  .table-container, #container.card {
+    padding: 2%;
+    width: 100%;
+    border-collapse: collapse;
+    span {
+      padding: 4px 2px;
+      box-shadow: none;
     }
   }
-  
+
+  @media (max-width: 650px) {
+    .header {
+      padding: 5% 0%;
+      border-bottom: 1px solid $secondary-text-color;
+    }
+    .table-container span {
+      padding: 1px 2px;
+      box-shadow: none;
+    }
+    thead {
+      display: none;
+    }
+    tbody tr:last-child td{
+      border-bottom: 1px solid $secondary-text-color;
+    }
+
+    table, tbody, tr, td {
+      display: block;
+      width: 100%;
+    }
+    tr {
+      margin-bottom: 7%;
+    }
+    td {
+      padding-left: 40%;
+      position: relative;
+    }
+    td:last-child {
+      text-align: start;
+    }
+    td::before {
+      content: attr(data-label);
+      position: absolute;
+      font-weight: bold;
+      width: 40%;
+      left: 0;
+    }
+  }
 }
