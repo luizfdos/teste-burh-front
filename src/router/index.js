@@ -6,6 +6,7 @@ import Main from '../components/Main.vue';
 import CreateTeacher from '../components/CreateTeacher.vue';
 import TeacherDetails from '../components/TeacherDetails.vue';
 import EditTeacher from '../components/EditTeacher.vue';
+import NotFound from '../components/NotFound.vue';
 
 Vue.use(VueRouter);
 export default new VueRouter({
@@ -30,8 +31,13 @@ export default new VueRouter({
           path: '/teacher/edit/:id',
           component: EditTeacher,
         },
+        {
+          path: '/:pathMatch(.*)*',
+          component: NotFound,
+        },
       ],
     },
+
   ],
   mode: 'history',
 });
