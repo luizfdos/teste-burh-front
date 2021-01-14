@@ -61,9 +61,12 @@ select {
   background-color: rgba(255, 255, 255, 0.05);
   border: none;
   font-size: 17px;
-  padding: 1%;
+  padding: 5px;
   outline: none;
   color: $text-color;
+  &:focus {
+    box-shadow: 0 0 0 1px #2196F3;
+  }
 }
 
 input[type="radio"]{
@@ -109,17 +112,18 @@ input[type="radio"]{
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: $hover-color;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px $hover-color;
 }
 
 input:checked + .slider:before {
   -webkit-transform: translateX(20px);
   -ms-transform: translateX(20px);
   transform: translateX(20px);
+  background-color: white;
 }
 .avatar {
   overflow: hidden;
@@ -135,10 +139,12 @@ input:checked + .slider:before {
 }
 .slider.round {
   border-radius: 34px;
+  background-color: #646059;
 }
 
 .slider.round:before {
   border-radius: 50%;
+  background-color: $secondary-text-color;
 }
 
 @media (max-width: 800px) {
