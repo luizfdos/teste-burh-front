@@ -85,14 +85,14 @@
       </div>
 
       <div class="item">
-        <div>Assuntos de ensinados</div>
+        <div>Assuntos ensinados</div>
         <div>
           <input
             type="text"
             v-model.trim="teacher.subjects_taught"
             @change="$v.teacher.subjects_taught.$touch()"
             :class="{ 'error': $v.teacher.subjects_taught.$error}"
-            placeholder="Digite  as matérias separadas por vírgula"
+            placeholder="Assuntos separados por vírgula"
             value=""
           />
         </div>

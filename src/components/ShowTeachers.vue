@@ -7,7 +7,7 @@
       <thead>
         <tr>
           <th>Professor</th>
-          <th class="subjects_taught">Acompanhamento</th>
+          <th class="subjects_taught">Assuntos</th>
           <th>Preço/hr</th>
           <th>Ação</th>
         </tr>
@@ -25,7 +25,7 @@
             {{ teacher.name }}
           </td>
           <td
-           data-label="Assunto"
+           data-label="Assuntos"
            class="subjects_taught">
             <span
               v-for="subject in teacher.subjects_taught"

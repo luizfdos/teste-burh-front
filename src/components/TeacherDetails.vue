@@ -25,7 +25,7 @@
       </div>
 
       <div class="item">
-        <div>Acompanhamento</div>
+        <div>Assuntos ensinados</div>
         <div>
           <span
             v-for="subject in teacher.subjects_taught"
